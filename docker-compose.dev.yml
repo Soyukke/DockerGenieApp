@@ -1,0 +1,13 @@
+version: "3"
+services:
+
+    genieapp:
+        build: .
+        volumes:
+            - ./GenieApp:/GenieApp
+        environment:
+            - GENIE_ENV=dev
+            - HOST=0.0.0.0
+            - PORT=8000
+        ports: 
+            - 8000:8000

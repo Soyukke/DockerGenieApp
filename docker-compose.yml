@@ -1,0 +1,29 @@
+version: "3"
+services:
+
+    certfront:
+        image: hoto17296/certfront
+        ports:
+            - 80:80
+            - 443:443
+        environment:
+            DOMAIN: example.com # Change this
+            EMAIL: example@example.com # Change this
+            APP_HOST: genieapp
+        volumes:
+            - certs:/etc/letsencrypt
+        depends_on:
+            - genieapp
+    
+    genieapp:
+        build: .
+        volumes:
+            - ./GenieApp:/GenieApp
+        environment:
+            - GENIE_ENV=prod
+            - HOST=0.0.0.0
+            - PORT=80
+
+volumes:
+    certs:
+        driver: local
